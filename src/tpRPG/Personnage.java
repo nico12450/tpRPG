@@ -1,7 +1,11 @@
 package tpRPG;
 
-public interface Personnage {
-	
-	public abstract void levelUp();
+public class Personnage {
 
+	public void levelUp() {
+		// TODO Auto-generated method stub
+		System.out.println("lvl up");
+		
+	}
+	
 }

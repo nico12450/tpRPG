@@ -1,10 +1,10 @@
 package tpRPG;
 
-public class Guerrier implements Personnage {
+public class Guerrier extends Personnage {
 	
 	private int PV = 300;
 	private int force = 10;
-	private int agilité = 8;
+	private int agilite = 8;
 	private int intelligence = 6;
 	private int lvl = 1;
 	private int xp = 1;
@@ -18,8 +18,8 @@ public class Guerrier implements Personnage {
 	public int getForce() {
 		return force;
 	}
-	public int getAgilité() {
-		return agilité;
+	public int getAgilite() {
+		return agilite;
 	}
 	public int getIntelligence() {
 		return intelligence;
@@ -32,12 +32,24 @@ public class Guerrier implements Personnage {
 	@Override
 	public void levelUp() {
 		// TODO Auto-generated method stub
-		System.out.println("lvl up");
+		super.levelUp();;
 		
 		this.force += 4;
-		this.agilité += 1;
+		this.agilite += 1;
 		this.intelligence += 1;
 		this.PV *= 1.1;
+		
+	}
+	
+	public String toString() {
+		
+		String description = "caractéristiques du personnage : \n";
+		description += "classe : Guerrier\n";
+		description += "force : " + this.force + "\n";
+		description += "agilité : " + this.agilite + "\n";
+		description += "intelligence : " + this.intelligence + "\n";
+		
+		return description;
 		
 	}
 

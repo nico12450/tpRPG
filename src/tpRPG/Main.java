@@ -54,6 +54,8 @@ public class Main {
 		
 		}
 		
+		System.out.println(personnage);
+		
 	}
 	
 	public static void affiche(String message) {
