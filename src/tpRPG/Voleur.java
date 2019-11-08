@@ -1,32 +1,16 @@
 package tpRPG;
 
 public class Voleur extends Personnage{
+	
+	public Voleur() {
+		super();
+		PVMax = 250;
+		PV = PVMax;
+		this.force = 8;
+		this.agilite = 10;
+		this.intelligence = 8;
+		this.classe = Classe.Voleur;
 
-	private int PV = 250;
-	private int force = 8;
-	private int agilite = 10;
-	private int intelligence = 8;
-	private int lvl = 1;
-	private int xp = 1;
-	
-	public int getXp() {
-		return xp;
-	}
-	public int getPV() {
-		return PV;
-	}
-	public int getForce() {
-		return force;
-	}
-	public int getAgilite() {
-		return agilite;
-	}
-	public int getIntelligence() {
-		return intelligence;
-	}
-	
-	public int getLvl() {
-		return lvl;
 	}
 	
 	@Override
@@ -37,17 +21,14 @@ public class Voleur extends Personnage{
 		this.force += 2;
 		this.agilite += 3;
 		this.intelligence += 2;
-		this.PV *= 1.08;
+		this.PVMax *= 1.08;
 			
 	}
 	
 	public String toString() {
 		
-		String description = "Caractéristiques du personnage : \n";
-		description += "classe : Voleur\n";
-		description += "force : " + this.force + "\n";
-		description += "agilité : " + this.agilite + "\n";
-		description += "intelligence : " + this.intelligence + "\n";
+		String description = "classe : Voleur\n";
+		description += super.toString();
 		
 		return description;
 		
