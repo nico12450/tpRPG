@@ -1,11 +1,12 @@
 package tpRPG;
 
 import java.util.Scanner;
+import static tpRPG.UtilsCombat.*;
 
 public class UtilsDeroulementPartie {
 	
 	private static Scanner sc = new Scanner(System.in);
-	private static Personnage personnage;
+	private static Personnage joueur;
 	private static int nbTour = 0;
 	
 	public static void debutPartie() {
@@ -27,25 +28,25 @@ public class UtilsDeroulementPartie {
 				case(1):
 					
 					afficheln("Vous avez choisi de jouer un Guerrier");
-					personnage = new Guerrier();	
+					joueur = new Guerrier();	
 					break;
 					
 				case(2):
 					
 					afficheln("Vous avez choisi de jouer un Mage");
-					personnage = new Mage();
+					joueur = new Mage();
 					break;
 					
 				case(3):
 					
 					afficheln("Vous avez choisi de jouer un Voleur");
-					personnage = new Voleur();
+					joueur = new Voleur();
 					break;
 					
 				case(4):
 					
 					afficheln("Vous avez choisi de jouer un Monstre");
-					personnage = new Monstre();
+					joueur = new Monstre();
 					break;
 					
 				default:
@@ -55,20 +56,8 @@ public class UtilsDeroulementPartie {
 			
 			}
 			
-			System.out.println(personnage);
+			System.out.println(joueur);
 			nextTour();
-			
-		}
-		
-		public static void affiche(String message) {
-			
-			System.out.println(message);
-			
-		}
-		
-		public static void afficheln(String message) {
-			
-			System.out.println("\n" + message + "\n");
 			
 		}
 		
@@ -80,11 +69,15 @@ public class UtilsDeroulementPartie {
 			
 			rencontre();
 			
-			testContinuer();
+			if(joueur.isAlive()) {
+				
+				choixContinuer();
+				
+			}
 			
 		}
 		
-		public static void testContinuer() {
+		public static void choixContinuer() {
 			
 			afficheln("Voulez vous continuer ? o/n");
 			
@@ -105,7 +98,7 @@ public class UtilsDeroulementPartie {
 				default:
 					
 					System.out.println("choix incorrect");
-					testContinuer();
+					choixContinuer();
 			
 			}
 			
@@ -126,7 +119,43 @@ public class UtilsDeroulementPartie {
 		
 		public static void rencontreEnnemi() {
 			
-			afficheln("Vous rencontrez un monstre");
+			affiche("Vous rencontrez un monstre");
+			
+			Monstre monstre = new Monstre();
+			
+			monstre.setLevel(joueur.getLvl());
+			
+			affiche(monstre);
+			
+			affiche("fuir ou combattre ? (f/c)");
+			
+			String choix = sc.nextLine();
+			
+			switch(choix) {
+			
+			case "f":
+				
+				affiche("vous choisissez la fuite");
+				break;
+				
+			case "c":
+				
+				affiche("vous choisissez le combat");
+				combat(joueur, monstre);
+				
+			}
+			
+		}
+		
+		public static void affiche(Object message) {
+			
+			System.out.println(message);
+			
+		}
+		
+		public static void afficheln(Object message) {
+			
+			System.out.println("\n" + message + "\n");
 			
 		}
 

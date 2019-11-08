@@ -40,7 +40,21 @@ public abstract class Personnage {
 	
 	public void levelUp() {
 		// TODO Auto-generated method stub
-		System.out.println("lvl up");
+		// System.out.println("lvl up");
+		lvl++;
+		
+	}
+	
+	//à améliorer pour tenir compte du niveau de l'adversaire de l'armure et du type d'attaque
+	public void degats(int nbDegats) {
+		
+		PV -= nbDegats;
+		
+	}
+	
+	public boolean isAlive() {
+		
+		return this.getPV() > 0;
 		
 	}
 	

@@ -4,7 +4,6 @@ import static tpRPG.UtilsRandom.getRandomInt;
 
 public class Monstre extends Personnage {
 	
-	
 	public Monstre() {
 		
 		force = getRandomInt(5, 12);
@@ -23,7 +22,7 @@ public class Monstre extends Personnage {
 		force += getRandomInt(0, 4);
 		agilite += getRandomInt(0, 4);
 		intelligence += getRandomInt(0, 4);
-		PVMax *= 1f + 100f/getRandomInt(6, 10);
+		PVMax *= 1f + getRandomInt(6, 10)/100f;
 		
 	}
 	
