@@ -71,26 +71,36 @@ public class UtilsDeroulementPartie {
 			
 			if(joueur.isAlive()) {
 				
-				choixContinuer();
+				joueur.levelUp();
+				choixAction();
 				
 			}
 			
 		}
 		
-		public static void choixContinuer() {
+		public static void choixAction() {
 			
-			afficheln("Voulez vous continuer ? o/n");
+			afficheln("Que souhaitez vous faire ?");
+			affiche("1- Continuer");
+			affiche("2- Sauvegarder");
+			affiche("3- Quitter");
 			
 			String choix = sc.nextLine();
 			
 			switch (choix) {
 			
-				case "o":
+				case "1":
 					
 					nextTour();
 					break;
 					
-				case "n":
+				case "2":
+					
+					afficheln("ce choix n'est pas encore implémenté");
+					choixAction();
+					break;
+					
+				case "3":
 					
 					System.out.println("fin de la partie");
 					break;
@@ -98,7 +108,7 @@ public class UtilsDeroulementPartie {
 				default:
 					
 					System.out.println("choix incorrect");
-					choixContinuer();
+					choixAction();
 			
 			}
 			

@@ -3,6 +3,9 @@ package tpRPG;
 import static tpRPG.UtilsDeroulementPartie.affiche;
 import static tpRPG.UtilsRandom.getRandomInt;
 
+import Armes.*;
+
+//la montee de niveau n'est pas encore implementée
 public class Personnage {
 	
 	protected int PV;
@@ -13,7 +16,7 @@ public class Personnage {
 	protected int xp = 1;
 	protected int PVMax;
 	protected Classe classe;
-	protected Arme arme;
+	protected Arme armeEquipee;
 	
 	
 	
@@ -26,40 +29,43 @@ public class Personnage {
 		
 			case Guerrier:
 				
-				PVMax = 300;
-				PV = PVMax;
+				this.PVMax = 300;
+				this.PV = PVMax;
 				this.force = 10;
 				this.agilite = 8;
 				this.intelligence = 6;
+				this.armeEquipee = new EpeeRouillee();
 				break;
 				
 			case Mage:
 				
-				PVMax = 200;
-				PV = PVMax;
-				force = 6;
+				this.PVMax = 200;
+				this.PV = PVMax;
+				this.force = 6;
 				this.agilite = 6;
 				this.intelligence = 10;
+				this.armeEquipee = new VieuxBaton();
 				break;
 				
 			case Voleur:
 				
-				PVMax = 250;
-				PV = PVMax;
+				this.PVMax = 250;
+				this.PV = PVMax;
 				this.force = 8;
 				this.agilite = 10;
 				this.intelligence = 8;
+				this.armeEquipee = new CouteauEmousse();
 				break;
 				
 			case Monstre:
 				
-				force = getRandomInt(5, 12);
-				agilite = getRandomInt(5, 12);
-				intelligence = getRandomInt(5, 12);
-				PVMax = getRandomInt(200, 300);
-				PV = PVMax;
+				this.force = getRandomInt(5, 12);
+				this.agilite = getRandomInt(5, 12);
+				this.intelligence = getRandomInt(5, 12);
+				this.PVMax = getRandomInt(200, 300);
+				this.PV = PVMax;
+				this.armeEquipee = new Griffes();
 				break;
-		
 		
 		}
 		
@@ -94,13 +100,13 @@ public class Personnage {
 	
 	public int getDegatsPhysiques(){
 		
-		return force * arme.getDegatsPhysiques();
+		return force * armeEquipee.getDegatsPhysiques();
 		
 	}
 	
 	public int getDegatsMagiques() {
 		
-		return intelligence * arme.getDegatsMagiques();
+		return intelligence * armeEquipee.getDegatsMagiques();
 		
 	}
 	
@@ -134,16 +140,18 @@ public class Personnage {
 				
 			case Monstre:
 				
-				force += getRandomInt(0, 4);
-				agilite += getRandomInt(0, 4);
-				intelligence += getRandomInt(0, 4);
-				PVMax *= 1f + getRandomInt(6, 10)/100f;
+				this.force += getRandomInt(0, 4);
+				this.agilite += getRandomInt(0, 4);
+				this.intelligence += getRandomInt(0, 4);
+				this.PVMax *= 1f + getRandomInt(6, 10)/100f;
 				break;
 		
 	
 		}
 		
 		lvl++;
+		
+		affiche("Vous passez au niveau " + lvl);
 		
 	}
 	
