@@ -31,7 +31,7 @@ public class UtilsCombat {
 			
 			if(tirage == 0) {
 				
-				adversaire.degats(actionJoueur());
+				actionJoueur(joueur, adversaire);
 				
 				if(adversaire.isAlive()) {
 					
@@ -49,7 +49,7 @@ public class UtilsCombat {
 			
 			else {
 				
-				joueur.degats(actionAdversaire());
+				actionAdversaire();
 				
 				if(joueur.isAlive()) {
 				
@@ -71,7 +71,7 @@ public class UtilsCombat {
 		
 	}
 	
-	public static int actionJoueur() {
+	public static void actionJoueur(Personnage joueur, Personnage adversaire) {
 		
 		afficheln("choix de l'action");
 		affiche("1- attaque physique");
@@ -86,27 +86,26 @@ public class UtilsCombat {
 		case "1":
 			
 			affiche("vous effectuez une attaque physique");
-			degats += getRandomInt(50, 100);
+			degats += joueur.getDegatsPhysiques();
+			adversaire.degats(degats, true);
 			break;
 			
 		case "2":
 			
 			affiche("vous effectuez une attaque magique");
+			degats += joueur.getDegatsMagiques();
+			adversaire.degats(degats, false);
 			break;
 			
 		default:
 			
 			affiche("choix incorrect");
 		
-		}
-		
-		affiche("vous infligez " + degats + " degats");
-		
-		return degats;
+		}	
 		
 	}
 	
-	public static int actionAdversaire() {
+	public static void actionAdversaire() {
 		
 		afficheln("au tour de l'adversaire");
 		
@@ -115,8 +114,6 @@ public class UtilsCombat {
 		affiche("l'attaque de l'adversaire n'est pas encore implémentée");
 		
 		affiche("vous recevez " + degats + " degats");
-		
-		return degats;
 		
 	}
 

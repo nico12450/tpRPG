@@ -28,25 +28,25 @@ public class UtilsDeroulementPartie {
 				case(1):
 					
 					afficheln("Vous avez choisi de jouer un Guerrier");
-					joueur = new Guerrier();	
+					joueur = new Personnage(Classe.Guerrier);	
 					break;
 					
 				case(2):
 					
 					afficheln("Vous avez choisi de jouer un Mage");
-					joueur = new Mage();
+					joueur = new Personnage(Classe.Mage);
 					break;
 					
 				case(3):
 					
 					afficheln("Vous avez choisi de jouer un Voleur");
-					joueur = new Voleur();
+					joueur = new Personnage(Classe.Voleur);
 					break;
 					
 				case(4):
 					
 					afficheln("Vous avez choisi de jouer un Monstre");
-					joueur = new Monstre();
+					joueur = new Personnage(Classe.Monstre);
 					break;
 					
 				default:
@@ -121,7 +121,7 @@ public class UtilsDeroulementPartie {
 			
 			affiche("Vous rencontrez un monstre");
 			
-			Monstre monstre = new Monstre();
+			Personnage monstre = new Personnage(Classe.Monstre);
 			
 			monstre.setLevel(joueur.getLvl());
 			
