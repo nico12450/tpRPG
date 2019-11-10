@@ -3,11 +3,16 @@ package tpRPG;
 import static tpRPG.UtilsDeroulementPartie.affiche;
 import static tpRPG.UtilsRandom.getRandomInt;
 
+import java.io.Serializable;
+
 import Armes.*;
 
-//la montee de niveau n'est pas encore implementée
-public class Personnage {
+public class Personnage implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5030269565134710376L;
 	protected int PV;
 	protected int force;
 	protected int agilite;

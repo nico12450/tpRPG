@@ -1,5 +1,11 @@
 package tpRPG;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import static tpRPG.UtilsCombat.*;
 
@@ -8,6 +14,68 @@ public class UtilsDeroulementPartie {
 	private static Scanner sc = new Scanner(System.in);
 	private static Personnage joueur;
 	private static int nbTour = 0;
+	private static File fichier =  new File("save.ser") ;
+	private static ObjectOutputStream oos = null;
+	private static ObjectInputStream ois = null;
+	
+	public static void menuDemarrage() {
+		
+		try {
+			
+			ois = new ObjectInputStream(new FileInputStream(fichier));
+			
+		}
+		
+		catch(IOException e) {
+			
+			debutPartie();
+			return;
+			
+		}
+		
+		finally {
+			
+			try {
+				
+				ois.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				
+				
+			}
+			
+		}
+		
+		afficheln("Que souhaitez vous faire ?");
+		
+		affiche("1- Charger une partie existante");
+		affiche("2- Commencer une nouvelle partie");
+		
+		int choix = Integer.parseInt(sc.nextLine());
+		
+		switch(choix) {
+		
+			case(1):
+				
+				chargerPartie();
+				nextTour();
+				break;
+				
+			case(2):
+				
+				debutPartie();
+				break;
+				
+			default:
+				
+				afficheln("Choix inconnu");
+				menuDemarrage();
+				break;
+			
+		}
+		
+	}
 	
 	public static void debutPartie() {
 			
@@ -65,8 +133,6 @@ public class UtilsDeroulementPartie {
 			
 			nbTour++;
 			
-			afficheln("Début du tour " + nbTour);
-			
 			rencontre();
 			
 			if(joueur.isAlive()) {
@@ -96,7 +162,8 @@ public class UtilsDeroulementPartie {
 					
 				case "2":
 					
-					afficheln("ce choix n'est pas encore implémenté");
+					sauvegarder();
+					afficheln("La partie a été sauvegardée");
 					choixAction();
 					break;
 					
@@ -152,6 +219,84 @@ public class UtilsDeroulementPartie {
 				
 				affiche("vous choisissez le combat");
 				combat(joueur, monstre);
+				
+			}
+			
+		}
+		
+		public static void sauvegarder() {
+			
+			try {
+				
+				oos = new ObjectOutputStream(new FileOutputStream(fichier));
+				oos.writeObject(joueur) ;
+				
+			}
+			
+			catch (IOException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+			
+			finally {
+				
+				try {
+					
+					oos.close();
+					
+				} catch (IOException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+				
+			}
+
+
+			
+		}
+		
+		public static void chargerPartie() {
+			
+			try {
+				
+				ois = new ObjectInputStream(new FileInputStream(fichier));
+				
+				try {
+					
+					joueur = (Personnage) ois.readObject();
+					
+				} catch (ClassNotFoundException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
+				
+			}
+			
+			catch (IOException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+			
+			finally {
+				
+				try {
+					
+					ois.close();
+					
+				} catch (IOException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					
+				}
 				
 			}
 			
