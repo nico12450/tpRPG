@@ -62,7 +62,7 @@ public class UtilsDeroulementPartie {
 			case(1):
 				
 				chargerPartie();
-				nextTour();
+				partie();
 				break;
 				
 			case(2):
