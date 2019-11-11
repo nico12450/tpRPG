@@ -19,6 +19,7 @@ public class UtilsDeroulementPartie {
 	private static File fichier =  new File("save.ser") ;
 	private static ObjectOutputStream oos = null;
 	private static ObjectInputStream ois = null;
+	private static boolean continuer;
 	
 	public static void menuDemarrage() {
 		
@@ -127,19 +128,29 @@ public class UtilsDeroulementPartie {
 			}
 			
 			System.out.println(joueur);
-			nextTour();
+			partie();
+			
+		}
+	
+		public static void partie() {
+			
+			continuer = true;
+			
+			while(continuer) {
+				
+				if(joueur.isAlive()) {
+					
+					choixAction();
+					
+				}
+				
+			}
 			
 		}
 		
 		public static void nextTour() {
 			
 			rencontre();
-			
-			if(joueur.isAlive()) {
-				
-				choixAction();
-				
-			}
 			
 		}
 		
@@ -175,6 +186,7 @@ public class UtilsDeroulementPartie {
 				case "4":
 					
 					System.out.println("fin de la partie");
+					continuer = false;
 					break;
 					
 				default:
@@ -328,7 +340,7 @@ public class UtilsDeroulementPartie {
 		
 		public static void menuMarchand() {
 			
-			affiche("Voulez vous acheter ou vendre ? (a/v)");
+			affiche("Voulez vous acheter vendre ou partir ? (a/v/p)");
 			
 			String choix = sc.nextLine();
 			
@@ -357,6 +369,11 @@ public class UtilsDeroulementPartie {
 				case "v":
 					
 					affiche("choix non implémenté");
+					break;
+					
+				case "p":
+					
+					choixAction();
 					break;
 					
 				default:
