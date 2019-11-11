@@ -16,7 +16,6 @@ public class UtilsDeroulementPartie {
 	
 	private static Scanner sc = new Scanner(System.in);
 	private static Personnage joueur;
-	private static int nbTour = 0;
 	private static File fichier =  new File("save.ser") ;
 	private static ObjectOutputStream oos = null;
 	private static ObjectInputStream ois = null;
@@ -99,25 +98,25 @@ public class UtilsDeroulementPartie {
 				case(1):
 					
 					afficheln("Vous avez choisi de jouer un Guerrier");
-					joueur = new Personnage(Classe.Guerrier);	
+					joueur = new Personnage(Classe.Guerrier, true);	
 					break;
 					
 				case(2):
 					
 					afficheln("Vous avez choisi de jouer un Mage");
-					joueur = new Personnage(Classe.Mage);
+					joueur = new Personnage(Classe.Mage, true);
 					break;
 					
 				case(3):
 					
 					afficheln("Vous avez choisi de jouer un Voleur");
-					joueur = new Personnage(Classe.Voleur);
+					joueur = new Personnage(Classe.Voleur, true);
 					break;
 					
 				case(4):
 					
 					afficheln("Vous avez choisi de jouer un Monstre");
-					joueur = new Personnage(Classe.Monstre);
+					joueur = new Personnage(Classe.Monstre, true);
 					break;
 					
 				default:
@@ -134,8 +133,6 @@ public class UtilsDeroulementPartie {
 		
 		public static void nextTour() {
 			
-			nbTour++;
-			
 			rencontre();
 			
 			if(joueur.isAlive()) {
@@ -150,8 +147,9 @@ public class UtilsDeroulementPartie {
 			
 			afficheln("Que souhaitez vous faire ?");
 			affiche("1- Continuer");
-			affiche("2- Sauvegarder");
-			affiche("3- Quitter");
+			affiche("2- menu personnage");
+			affiche("3- Sauvegarder");
+			affiche("4- Quitter");
 			
 			String choix = sc.nextLine();
 			
@@ -164,12 +162,17 @@ public class UtilsDeroulementPartie {
 					
 				case "2":
 					
+					menuPersonnage();
+					break;
+					
+				case "3":
+					
 					sauvegarder();
 					afficheln("La partie a été sauvegardée");
 					choixAction();
 					break;
 					
-				case "3":
+				case "4":
 					
 					System.out.println("fin de la partie");
 					break;
@@ -204,7 +207,7 @@ public class UtilsDeroulementPartie {
 			
 			affiche("Vous rencontrez un monstre");
 			
-			Personnage monstre = new Personnage(Classe.Monstre);
+			Personnage monstre = new Personnage(Classe.Monstre, false);
 			
 			monstre.setLevel(joueur.getLvl());
 			
@@ -319,38 +322,78 @@ public class UtilsDeroulementPartie {
 			
 			afficheln("Vous rencontrez le marchand");
 			
-			if(joueur.getArgent() == 0) {
-				
-				affiche("Vous n'avez aucune piece d'or, le marchand continue sa route");
-				
-			}
+			menuMarchand();			
 			
-			else {
-				
-				affiche("Voulez vous acheter une potion de vie inférieure pour 1 PO ? (o/n)");
-				
-				String choix = sc.nextLine();
-				
-				switch(choix) {
-				
-					case "o":
+		}
+		
+		public static void menuMarchand() {
+			
+			affiche("Voulez vous acheter ou vendre ? (a/v)");
+			
+			String choix = sc.nextLine();
+			
+			switch(choix) {
+			
+				case "a":
+					
+					Item achat = menuAchat();
+					
+					if(achat != null) {
 						
 						joueur.achat(new PotionPVInferieure());
 						break;
 						
-					case "n":
+					}
+					
+					else {
 						
-						nextTour();
+						menuMarchand();
 						break;
 						
-					default:
-						
-						affiche("choix invalide");
-						rencontreMarchand();
-						break;
-				}
-				
+					}
+					
+
+					
+				case "v":
+					
+					affiche("choix non implémenté");
+					break;
+					
+				default:
+					
+					affiche("choix invalide");
+					rencontreMarchand();
+					break;
 			}
+			
+		}
+		
+		public static Item menuAchat() {
+			
+			affiche("1- potion de vie inférieure (1 PO)");
+			affiche("2- retour");
+			
+			String choix = sc.nextLine();
+			
+			switch (choix) {
+			
+			case "1":
+				
+				affiche("vous achetez une potion de vie inférieure");
+				return new PotionPVInferieure();
+			
+			}
+			
+			return null;
+			
+		}
+		
+		public static void menuPersonnage() {
+			
+			afficheln(joueur);
+			affiche("le menu n'est pas encore implémenté appuyez sur une touche pour continuer");
+			sc.nextLine();
+			choixAction();
 			
 		}
 		

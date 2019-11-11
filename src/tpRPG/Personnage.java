@@ -27,13 +27,15 @@ public class Personnage implements Serializable{
 	private Arme armeEquipee;
 	private int argent = 0;
 	private List<Item> items = new ArrayList<Item>();
+	private boolean isJoueur;
 	
 	
 	
-	public Personnage(Classe classe) {
+	public Personnage(Classe classe, boolean isJoueur) {
 		
 		super();
 		this.classe = classe;
+		this.isJoueur = isJoueur;
 
 		switch (classe) {
 		
@@ -126,6 +128,10 @@ public class Personnage implements Serializable{
 
 	public int getArgent() {
 		return argent;
+	}
+
+	public List<Item> getItems() {
+		return items;
 	}
 
 	public void giveXP(int nbXP) {
@@ -251,13 +257,27 @@ public class Personnage implements Serializable{
 	
 	public String toString() {
 		
-		String description = "caractéristiques du personnage : \n";
+		String description = "";
+		
+		if(isJoueur) {
+			
+			description += "caractéristiques du personnage : \n";
+			
+		}
+		
+		else {
+			
+			description += "caractéristiques de l'adversaire : \n";
+			
+		}
+		
 		description += "force : " + this.getForce() + "\n";
 		description += "agilité : " + this.getAgilite() + "\n";
 		description += "intelligence : " + this.getIntelligence() + "\n";
 		description += "PV : " + this.getPV() + "\n";
 		description += "PV maximum : " + this.getPVMax() + "\n";
 		description += "lvl : " + this.getLvl() + "\n";
+		description += "items : " +this.getItems() + "\n";
 		
 		return description;
 		
