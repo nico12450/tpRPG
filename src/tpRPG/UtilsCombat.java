@@ -43,6 +43,14 @@ public class UtilsCombat {
 					
 					afficheln("l'adversaire est vaincu");
 					
+					int lvlEnnemi = adversaire.getLvl();
+					
+					String message = lvlEnnemi > 1 ? " point d'expérience reçu" : " points d'expérience reçus";
+					
+					affiche(lvlEnnemi + message);
+					
+					joueur.giveXP(lvlEnnemi);
+					
 				}
 				
 			}

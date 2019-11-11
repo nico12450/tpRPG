@@ -1,4 +1,4 @@
-package Armes;
+package armes;
 
 import tpRPG.*;
 
@@ -7,7 +7,7 @@ public class Griffes extends Arme{
 	public Griffes() {
 		
 		this.degatsPhysiques = 5;
-		this.type = TypeArme.UneMain;
+		this.typeArme = TypeArme.UneMain;
 		this.rarete = null;
 		this.valeur = 0;
 		

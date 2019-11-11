@@ -5,7 +5,7 @@ import static tpRPG.UtilsRandom.getRandomInt;
 
 import java.io.Serializable;
 
-import Armes.*;
+import armes.*;
 
 public class Personnage implements Serializable{
 	
@@ -13,15 +13,16 @@ public class Personnage implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5030269565134710376L;
-	protected int PV;
-	protected int force;
-	protected int agilite;
-	protected int intelligence;
-	protected int lvl = 1;
-	protected int xp = 1;
-	protected int PVMax;
-	protected Classe classe;
-	protected Arme armeEquipee;
+	private int PV;
+	private int force;
+	private int agilite;
+	private int intelligence;
+	private int lvl = 1;
+	private int xp = 0;
+	private int PVMax;
+	private Classe classe;
+	private Arme armeEquipee;
+	private int argent = 0;
 	
 	
 	
@@ -115,6 +116,18 @@ public class Personnage implements Serializable{
 		
 	}
 	
+	public void giveXP(int nbXP) {
+		
+		xp += nbXP;
+		
+		if(xp >= lvl * lvl) {
+			
+			levelUp();
+			
+		}
+		
+	}
+	
 	public void levelUp() {
 		
 		switch (classe) {
@@ -150,11 +163,11 @@ public class Personnage implements Serializable{
 				this.intelligence += getRandomInt(0, 4);
 				this.PVMax *= 1f + getRandomInt(6, 10)/100f;
 				break;
-		
 	
 		}
 		
 		lvl++;
+		xp = 0;
 		
 		affiche("Vous passez au niveau " + lvl);
 		
@@ -181,6 +194,14 @@ public class Personnage implements Serializable{
 	public boolean isAlive() {
 		
 		return this.getPV() > 0;
+		
+	}
+	
+	public void afficheArgent() {
+		
+		String message = argent > 1 ? " pièce d'or" : " pièces d'or";
+		
+		affiche("vous possédez " + argent + message);
 		
 	}
 	

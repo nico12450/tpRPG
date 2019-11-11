@@ -137,7 +137,6 @@ public class UtilsDeroulementPartie {
 			
 			if(joueur.isAlive()) {
 				
-				joueur.levelUp();
 				choixAction();
 				
 			}
@@ -299,6 +298,12 @@ public class UtilsDeroulementPartie {
 				}
 				
 			}
+			
+		}
+		
+		public static void rencontreMarchand() {
+			
+			afficheln("Vous rencontrez le marchand");
 			
 		}
 		
