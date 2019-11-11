@@ -10,6 +10,7 @@ public class CouteauEmousse extends Arme {
 		this.typeArme = TypeArme.UneMain;
 		this.rarete = Rarete.Commun;
 		this.valeur = 3;
+		this.description = "couteau émoussé";
 		
 	}
 

@@ -124,5 +124,11 @@ public class UtilsCombat {
 		affiche("vous recevez " + degats + " degats");
 		
 	}
+	
+	public static void fuite() {
+		
+		affiche("La fuite n'est pas encore implémentée");
+		
+	}
 
 }

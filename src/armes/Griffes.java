@@ -10,6 +10,7 @@ public class Griffes extends Arme{
 		this.typeArme = TypeArme.UneMain;
 		this.rarete = null;
 		this.valeur = 0;
+		this.description = "griffes";
 		
 	}
 

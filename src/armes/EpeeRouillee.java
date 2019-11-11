@@ -10,6 +10,7 @@ public class EpeeRouillee extends Arme {
 		this.typeArme = TypeArme.DeuxMain;
 		this.rarete = Rarete.Commun;
 		this.valeur = 5;
+		this.description = "vieille épée rouillée";
 		
 	}
 

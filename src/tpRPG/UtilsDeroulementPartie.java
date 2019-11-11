@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
+import consommables.PotionPVInferieure;
+
 import static tpRPG.UtilsCombat.*;
 
 public class UtilsDeroulementPartie {
@@ -182,12 +185,16 @@ public class UtilsDeroulementPartie {
 		
 		public static void rencontre() {
 			
-			switch (UtilsRandom.getRandomInt(1, 2)) {
+			switch (UtilsRandom.getRandomInt(1, 3)) {
 			
 			case 1:
 				
 				rencontreEnnemi();
 				break;
+				
+			case 2:
+				
+				rencontreMarchand();
 			
 			}
 			
@@ -212,12 +219,19 @@ public class UtilsDeroulementPartie {
 			case "f":
 				
 				affiche("vous choisissez la fuite");
+				fuite();
 				break;
 				
 			case "c":
 				
 				affiche("vous choisissez le combat");
 				combat(joueur, monstre);
+				break;
+				
+			default:
+				
+				affiche("Choix incorrect");
+				rencontreEnnemi();
 				
 			}
 			
@@ -304,6 +318,39 @@ public class UtilsDeroulementPartie {
 		public static void rencontreMarchand() {
 			
 			afficheln("Vous rencontrez le marchand");
+			
+			if(joueur.getArgent() == 0) {
+				
+				affiche("Vous n'avez aucune piece d'or, le marchand continue sa route");
+				
+			}
+			
+			else {
+				
+				affiche("Voulez vous acheter une potion de vie inférieure pour 1 PO ? (o/n)");
+				
+				String choix = sc.nextLine();
+				
+				switch(choix) {
+				
+					case "o":
+						
+						joueur.achat(new PotionPVInferieure());
+						break;
+						
+					case "n":
+						
+						nextTour();
+						break;
+						
+					default:
+						
+						affiche("choix invalide");
+						rencontreMarchand();
+						break;
+				}
+				
+			}
 			
 		}
 		

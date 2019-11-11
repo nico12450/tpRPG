@@ -11,6 +11,7 @@ public class VieuxBaton extends Arme{
 		this.typeArme = TypeArme.DeuxMain;
 		this.rarete = Rarete.Commun;
 		this.valeur = 10;
+		this.description = "vieux baton";
 		
 	}
 

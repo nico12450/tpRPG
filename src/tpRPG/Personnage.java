@@ -1,9 +1,12 @@
 package tpRPG;
 
 import static tpRPG.UtilsDeroulementPartie.affiche;
+
 import static tpRPG.UtilsRandom.getRandomInt;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import armes.*;
 
@@ -23,6 +26,7 @@ public class Personnage implements Serializable{
 	private Classe classe;
 	private Arme armeEquipee;
 	private int argent = 0;
+	private List<Item> items = new ArrayList<Item>();
 	
 	
 	
@@ -115,7 +119,15 @@ public class Personnage implements Serializable{
 		return intelligence * armeEquipee.getDegatsMagiques();
 		
 	}
-	
+
+	public Arme getArmeEquipee() {
+		return armeEquipee;
+	}
+
+	public int getArgent() {
+		return argent;
+	}
+
 	public void giveXP(int nbXP) {
 		
 		xp += nbXP;
@@ -197,11 +209,43 @@ public class Personnage implements Serializable{
 		
 	}
 	
+	public void addPV(int nbPV) {
+		
+		PV += nbPV;
+		
+		if (PV > PVMax) {
+			
+			PV = PVMax;
+			
+		}
+		
+	}
+	
 	public void afficheArgent() {
 		
 		String message = argent > 1 ? " pièce d'or" : " pièces d'or";
 		
 		affiche("vous possédez " + argent + message);
+		
+	}
+	
+	public void achat(Item i) {
+		// TODO Auto-generated method stub
+		
+		int valeur = i.getValeur();
+		
+		if(valeur < argent) {
+			
+			items.add(i);
+			argent -= valeur;
+			
+		}
+		
+		else {
+			
+			affiche("Achat impossible, vous n'avez pas assez de PO");
+			
+		}
 		
 	}
 	
