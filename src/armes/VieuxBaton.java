@@ -4,6 +4,11 @@ import tpRPG.*;
 
 public class VieuxBaton extends Arme{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7579923862573650051L;
+
 	public VieuxBaton() {
 		
 		this.degatsMagiques = 8;

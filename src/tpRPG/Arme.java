@@ -1,13 +1,11 @@
 package tpRPG;
 
-import java.io.Serializable;
-
-public abstract class Arme extends Item implements Serializable{
+public abstract class Arme extends Item{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9145663592899238418L;
+	private static final long serialVersionUID = -9164024516045867053L;
 	protected int degatsPhysiques = 0;
 	protected int degatsMagiques = 0;
 	protected TypeArme typeArme;

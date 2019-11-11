@@ -1,7 +1,13 @@
 package tpRPG;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1233192891438319937L;
 	protected String description;
 	protected int valeur;
 	
