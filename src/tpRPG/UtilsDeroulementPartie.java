@@ -136,13 +136,10 @@ public class UtilsDeroulementPartie {
 			
 			continuer = true;
 			
-			while(continuer) {
-				
-				if(joueur.isAlive()) {
+			while(continuer && joueur.isAlive()) {	
 					
-					choixAction();
-					
-				}
+				choixAction();
+
 				
 			}
 			

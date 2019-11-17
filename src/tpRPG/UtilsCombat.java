@@ -50,6 +50,7 @@ public class UtilsCombat {
 					affiche(lvlEnnemi + message);
 					
 					joueur.giveXP(lvlEnnemi);
+					joueur.giveMoney(getRandomInt(lvlEnnemi, lvlEnnemi * 3));
 					
 				}
 				
@@ -57,7 +58,7 @@ public class UtilsCombat {
 			
 			else {
 				
-				actionAdversaire();
+				actionAdversaire(joueur, adversaire);
 				
 				if(joueur.isAlive()) {
 				
@@ -113,15 +114,16 @@ public class UtilsCombat {
 		
 	}
 	
-	public static void actionAdversaire() {
+	public static void actionAdversaire(Personnage joueur, Personnage adversaire) {
 		
 		afficheln("au tour de l'adversaire");
 		
 		int degats = 0;
 		
-		affiche("l'attaque de l'adversaire n'est pas encore implémentée");
+		affiche("L'adversaire effectue une attaque physique");
 		
-		affiche("vous recevez " + degats + " degats");
+		degats += adversaire.getDegatsPhysiques();	
+		joueur.degats(degats, true);
 		
 	}
 	

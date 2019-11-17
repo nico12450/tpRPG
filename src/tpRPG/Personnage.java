@@ -255,6 +255,16 @@ public class Personnage implements Serializable{
 		
 	}
 	
+	public void giveMoney(int v) {
+		
+		argent += v;
+		
+		String message = v >1 ? " pièces d'or" : " pièce d'or";
+		
+		affiche("Vous recevez " + v + message);
+		
+	}
+	
 	public String toString() {
 		
 		String description = "";
@@ -277,7 +287,13 @@ public class Personnage implements Serializable{
 		description += "PV : " + this.getPV() + "\n";
 		description += "PV maximum : " + this.getPVMax() + "\n";
 		description += "lvl : " + this.getLvl() + "\n";
-		description += "items : " +this.getItems() + "\n";
+		description += "items : " + this.getItems() + "\n";
+		
+		if(isJoueur) {
+			
+			description += "argent : " + this.getArgent() + " PO\n";
+			
+		}
 		
 		return description;
 		
