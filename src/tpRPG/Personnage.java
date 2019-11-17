@@ -1,6 +1,6 @@
 package tpRPG;
 
-import static tpRPG.UtilsDeroulementPartie.affiche;
+import static tpRPG.UtilsDeroulementPartie.*;
 
 import static tpRPG.UtilsRandom.getRandomInt;
 
@@ -25,8 +25,9 @@ public class Personnage implements Serializable{
 	private int PVMax;
 	private Classe classe;
 	private Arme armeEquipee;
-	private int argent = 0;
+	private int argent = 1;
 	private List<Item> items = new ArrayList<Item>();
+	private List<Consommable> consommables = new ArrayList<Consommable>();
 	private boolean isJoueur;
 	
 	
@@ -125,13 +126,21 @@ public class Personnage implements Serializable{
 	public Arme getArmeEquipee() {
 		return armeEquipee;
 	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
 
 	public int getArgent() {
 		return argent;
 	}
 
-	public List<Item> getItems() {
-		return items;
+	public List<Consommable> getConsommables() {
+		return consommables;
 	}
 
 	public void giveXP(int nbXP) {
@@ -186,8 +195,9 @@ public class Personnage implements Serializable{
 		
 		lvl++;
 		xp = 0;
+		PV = PVMax;
 		
-		affiche("Vous passez au niveau " + lvl);
+		afficheln("Vous passez au niveau " + lvl);
 		
 	}
 	
@@ -243,6 +253,7 @@ public class Personnage implements Serializable{
 		if(valeur < argent) {
 			
 			items.add(i);
+			
 			argent -= valeur;
 			
 		}
@@ -255,6 +266,13 @@ public class Personnage implements Serializable{
 		
 	}
 	
+	public void achatConsommable(Consommable c) {
+		
+		consommables.add(c);
+		achat(c);
+		
+	}
+	
 	public void giveMoney(int v) {
 		
 		argent += v;
@@ -262,6 +280,35 @@ public class Personnage implements Serializable{
 		String message = v >1 ? " pièces d'or" : " pièce d'or";
 		
 		affiche("Vous recevez " + v + message);
+		
+	}
+	
+	public void useItem(Consommable c) {
+		
+		c.effet(this);
+		
+	}
+	
+	public void useItem(int i) {
+		
+		if(i>=0 && i<consommables.size()) {
+			
+			useItem(consommables.get(i));
+			
+		}
+		
+	}
+	
+	public void afficherChoixConsommables() {
+		
+		int i = 0;
+		
+		for(Consommable c : this.getConsommables()) {
+			
+			affiche(i++ + ") " + c.description);
+			
+		}
+		
 		
 	}
 	

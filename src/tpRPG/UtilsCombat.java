@@ -82,6 +82,27 @@ public class UtilsCombat {
 	
 	public static void actionJoueur(Personnage joueur, Personnage adversaire) {
 		
+		if(!joueur.getConsommables().isEmpty()) {
+			
+			affiche("Utiliser un consommable ? (o/n)");
+			
+			String choix = sc.nextLine();
+			
+			if(choix.equals("o")) {
+				
+				affiche("Que souhaitez vous utiliser ?");
+				joueur.afficherChoixConsommables();
+				affiche("appuyez sur une autre touche pour annuler");
+				
+				choix = sc.nextLine();
+				
+				joueur.useItem(Integer.parseInt(choix));
+				
+				
+			}
+			
+		}
+		
 		afficheln("choix de l'action");
 		affiche("1- attaque physique");
 		affiche("2- attaque magique");

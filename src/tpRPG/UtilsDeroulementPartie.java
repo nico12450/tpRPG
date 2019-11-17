@@ -197,17 +197,18 @@ public class UtilsDeroulementPartie {
 		
 		public static void rencontre() {
 			
-			switch (UtilsRandom.getRandomInt(1, 3)) {
+			int tirage = UtilsRandom.getRandomInt(1, 4);
 			
-			case 1:
+			if(tirage < 3) {
 				
 				rencontreEnnemi();
-				break;
 				
-			case 2:
+			}
+			
+			else {
 				
 				rencontreMarchand();
-			
+				
 			}
 			
 		}
@@ -345,11 +346,12 @@ public class UtilsDeroulementPartie {
 			
 				case "a":
 					
-					Item achat = menuAchat();
+					Consommable achat = menuAchat();
 					
 					if(achat != null) {
 						
-						joueur.achat(new PotionPVInferieure());
+						joueur.achatConsommable(achat);
+						menuAchat();
 						break;
 						
 					}
@@ -382,7 +384,7 @@ public class UtilsDeroulementPartie {
 			
 		}
 		
-		public static Item menuAchat() {
+		public static Consommable menuAchat() {
 			
 			affiche("1- potion de vie inférieure (1 PO)");
 			affiche("2- retour");
